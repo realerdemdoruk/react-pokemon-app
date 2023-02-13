@@ -1,12 +1,11 @@
 import React from 'react';
+import Popup from './Popup';
+import { useState } from 'react';
 
-const PokemonList = ({
-  pokemon,
-  search,
-  pokemonImage,
-  pokemonId,
-  setPokemonImage,
-}) => {
+const PokemonList = ({ pokemon, search }) => {
+  const [buttonPopup, setButtonPopup] = useState(false);
+  // console.log(pokemon);
+
   return (
     <div className="pokemonContainer">
       {pokemon
@@ -25,22 +24,24 @@ const PokemonList = ({
             <div key={index} className="pokemonCard">
               <h3>{pokemon.name}</h3>
 
-              {/* <img
-                // src={
-                //   'https://unpkg.com/pokeapi-sprites@2.0.2/sprites/pokemon/other/dream-world/${pokemonImage}.svg'
-                // }
-                alt={pokemon.name}
-              /> */}
               <img
-                src={
-                  // 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/' +
-                  // setPokemonImage +
-                  // '.svg'
-
-                  pokemonImage
-                }
+                src={`http://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${
+                  index + 1
+                }.png`}
                 alt={pokemon.name}
               />
+              <button onClick={() => setButtonPopup(true)}>
+                Daha fazla bilgi
+              </button>
+
+              <Popup
+                trigger={buttonPopup}
+                pokemon={pokemon}
+                setTrigger={setButtonPopup}
+                search={search}
+              >
+                <h1>My popup</h1>
+              </Popup>
             </div>
           );
         })}
