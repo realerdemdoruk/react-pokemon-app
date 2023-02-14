@@ -4,7 +4,13 @@ import { useState } from 'react';
 
 const PokemonList = ({ pokemon, search }) => {
   const [buttonPopup, setButtonPopup] = useState(false);
+  const [birTanePokemon, setBirTanePokemon] = useState({});
   // console.log(pokemon);
+
+  const dahaFazla = (data) => {
+    setButtonPopup(true);
+    setBirTanePokemon(data);
+  };
 
   return (
     <div className="pokemonContainer">
@@ -18,7 +24,6 @@ const PokemonList = ({ pokemon, search }) => {
             return pokemon;
           }
         })
-
         .map((pokemon, index) => {
           return (
             <div key={index} className="pokemonCard">
@@ -30,18 +35,15 @@ const PokemonList = ({ pokemon, search }) => {
                 }.png`}
                 alt={pokemon.name}
               />
-              <button onClick={() => setButtonPopup(true)}>
-                Daha fazla bilgi
+              <button onClick={() => dahaFazla(pokemon)}>
+                More information
               </button>
-
-              <Popup
-                trigger={buttonPopup}
-                pokemon={pokemon}
-                setTrigger={setButtonPopup}
-                search={search}
-              >
-                <h1>My popup</h1>
-              </Popup>
+              {buttonPopup && (
+                <Popup
+                  birTanePokemon={birTanePokemon}
+                  setTrigger={setButtonPopup}
+                />
+              )}
             </div>
           );
         })}

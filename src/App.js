@@ -14,13 +14,13 @@ function App() {
   }, []);
 
   const getPokemon = () => {
-    fetch('https://pokeapi.co/api/v2/pokemon?limit=150')
+    fetch('https://pokeapi.co/api/v2/pokemon?limit=150%22')
       .then((response) => response.json())
       .then((data) => {
         setPokemon(data.results);
-        setLoading(false);
         setPokemonImage(pokemonImage);
-      });
+      })
+      .finally(() => setLoading(false));
   };
 
   return (
