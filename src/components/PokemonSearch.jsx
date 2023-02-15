@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { GlobalContext } from '../Context/GlobalState';
 
-const PokemonSearch = ({ search, setSearch }) => {
+const PokemonSearch = () => {
+  const { search, setSearch } = useContext(GlobalContext);
   return (
     <div>
       <input

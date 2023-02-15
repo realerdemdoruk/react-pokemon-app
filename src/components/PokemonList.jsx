@@ -1,16 +1,18 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Popup from './Popup';
-import { useState } from 'react';
+import { GlobalContext } from '../Context/GlobalState';
 
-const PokemonList = ({ pokemon, search }) => {
-  const [buttonPopup, setButtonPopup] = useState(false);
-  const [birTanePokemon, setBirTanePokemon] = useState({});
+const PokemonList = () => {
+  const {
+    search,
+    pokemon,
+    setButtonPopup,
+    birTanePokemon,
+    buttonPopup,
+    dahaFazla,
+  } = useContext(GlobalContext);
+
   // console.log(pokemon);
-
-  const dahaFazla = (data) => {
-    setButtonPopup(true);
-    setBirTanePokemon(data);
-  };
 
   return (
     <div className="pokemonContainer">

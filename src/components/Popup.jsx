@@ -1,18 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { GlobalContext } from '../Context/GlobalState';
 import './Popup.css';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import ProcessBar from '../components/ProcessBar/ProcessBar';
-const Popup = ({ setTrigger, birTanePokemon }) => {
-  const [pokemonData, setPokemonData] = useState({});
-  const [loading, setLoading] = useState(true);
+const Popup = ({ setTrigger }) => {
+  const { loading, pokemonData, birTanePokemon, getPokemonData } =
+    useContext(GlobalContext);
 
   useEffect(() => {
-    fetch(`https://pokeapi.co/api/v2/pokemon/${birTanePokemon.name}`)
-      .then((response) => response.json())
-      .then((data) => {
-        setPokemonData(data);
-      })
-      .finally(() => setLoading(false));
+    getPokemonData();
   }, []);
 
   return (
@@ -67,7 +63,6 @@ const Popup = ({ setTrigger, birTanePokemon }) => {
                       style={{
                         display: 'flex',
                         alignItems: 'center',
-
                         flexDirection: 'column',
                       }}
                     >
