@@ -1,18 +1,17 @@
 import React, { useContext } from 'react';
 import Popup from './Popup';
 import { GlobalContext } from '../Context/GlobalState';
+import { capitilizer } from '../capitilizer';
 
 const PokemonList = () => {
   const {
     search,
     pokemon,
     setButtonPopup,
-    birTanePokemon,
+    onePacman,
     buttonPopup,
-    dahaFazla,
+    morePokemon,
   } = useContext(GlobalContext);
-
-  // console.log(pokemon);
 
   return (
     <div className="pokemonContainer">
@@ -29,7 +28,7 @@ const PokemonList = () => {
         .map((pokemon, index) => {
           return (
             <div key={index} className="pokemonCard">
-              <h3>{pokemon.name}</h3>
+              <h3>{capitilizer(pokemon.name)}</h3>
 
               <img
                 src={`http://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${
@@ -37,14 +36,11 @@ const PokemonList = () => {
                 }.png`}
                 alt={pokemon.name}
               />
-              <button onClick={() => dahaFazla(pokemon)}>
+              <button onClick={() => morePokemon(pokemon)}>
                 More information
               </button>
               {buttonPopup && (
-                <Popup
-                  birTanePokemon={birTanePokemon}
-                  setTrigger={setButtonPopup}
-                />
+                <Popup onePacman={onePacman} setTrigger={setButtonPopup} />
               )}
             </div>
           );

@@ -3,8 +3,9 @@ import { GlobalContext } from '../Context/GlobalState';
 import './Popup.css';
 import { useEffect } from 'react';
 import ProcessBar from '../components/ProcessBar/ProcessBar';
+import { capitilizer } from '../capitilizer';
 const Popup = ({ setTrigger }) => {
-  const { loading, pokemonData, birTanePokemon, getPokemonData } =
+  const { loadingPopup, pokemonData, onePacman, getPokemonData } =
     useContext(GlobalContext);
 
   useEffect(() => {
@@ -18,31 +19,18 @@ const Popup = ({ setTrigger }) => {
           close
         </button>
 
-        {loading ? (
+        {loadingPopup ? (
           <div className="loading">Loading...</div>
         ) : (
           <div>
-            <div
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                flexWrap: 'wrap',
-              }}
-            >
-              <div
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  flexDirection: 'row',
-                  gap: '10px',
-                }}
-              >
-                <h5>name:</h5> <p> {birTanePokemon?.name}</p>
+            <div className="popupContent">
+              <div className="popupContent">
+                <h5>Name:</h5> <p> {capitilizer(onePacman?.name)}</p>
                 <div>
                   {pokemonData.sprites?.front_default && (
                     <img
                       src={pokemonData.sprites?.front_default}
-                      alt={birTanePokemon?.name}
+                      alt={onePacman?.name}
                       width="200px"
                       height="200px"
                     />
@@ -58,39 +46,17 @@ const Popup = ({ setTrigger }) => {
               >
                 {pokemonData.stats?.map((stat, index) => {
                   return (
-                    <div
-                      key={index}
-                      style={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        flexDirection: 'column',
-                      }}
-                    >
-                      <ProcessBar width={'150px'} value={stat.base_stat} />
+                    <div className="popupCard" key={index}>
+                      <ProcessBar width={'200px'} value={stat.base_stat} />
                     </div>
                   );
                 })}
 
-                <div
-                  style={{
-                    display: 'flex',
-                    flexDirection: 'row',
-                    gap: '10px',
-                  }}
-                >
+                <div className="pupupAbility">
                   <h4>Ability:</h4>
                   {pokemonData.abilities?.map((ability, index) => {
                     return (
-                      <div
-                        key={index}
-                        style={
-                          {
-                            // display: 'flex',
-                            // flexDirection: 'row',
-                            // gap: '10px',
-                          }
-                        }
-                      >
+                      <div key={index}>
                         <h5> {ability.ability.name}</h5>
                       </div>
                     );

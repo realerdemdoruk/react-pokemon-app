@@ -1,7 +1,7 @@
 import React, { useEffect, useContext } from 'react';
 import { GlobalContext } from '../Context/GlobalState';
-import PokemonList from './PokemonList';
-import PokemonSearch from './PokemonSearch';
+import PokemonList from '../components/PokemonList';
+import PokemonSearch from '../components/PokemonSearch';
 import '../App.css';
 
 export const Home = () => {
@@ -16,13 +16,7 @@ export const Home = () => {
     <div className="app">
       <h1>Pokemon</h1>
       <PokemonSearch search={search} setSearch={setSearch} />
-      <div>
-        {loading ? (
-          <h1 className="">Loading...</h1>
-        ) : (
-          <PokemonList search={search} pokemon={pokemon} />
-        )}
-      </div>
+      <div>{loading ? <h1 className="">Loading...</h1> : <PokemonList />}</div>
     </div>
   );
 };

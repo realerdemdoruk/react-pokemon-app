@@ -4,11 +4,11 @@
   left: 0;
   width: 100%;
   height: 100vh;
-  /* background-color: rgba(0, 0, 0, 0.1); */
   z-index: 100;
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: black;
 }
 
 .popup-inner {
@@ -25,4 +25,26 @@
   position: absolute;
   top: 16px;
   right: 16px;
+}
+
+.popupContent {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.popupCard {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.pupupAbility {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  gap: 10px;
 }

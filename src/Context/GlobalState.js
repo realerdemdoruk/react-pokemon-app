@@ -1,4 +1,4 @@
-import { createContext, useState } from 'react';
+import { createContext, useState, useMemo } from 'react';
 
 export const GlobalContext = createContext();
 export const GlobalProvider = (props) => {
@@ -6,16 +6,17 @@ export const GlobalProvider = (props) => {
   const [search, setSearch] = useState('');
   const [loading, setLoading] = useState(true);
   const [buttonPopup, setButtonPopup] = useState(false);
-  const [birTanePokemon, setBirTanePokemon] = useState({});
+  const [onePacman, setOnePacman] = useState({}); //setBirTanePokemon
   const [pokemonData, setPokemonData] = useState({});
+  const [loadingPopup, setLoadingPopup] = useState(true);
 
-  const dahaFazla = (data) => {
+  const morePokemon = (data) => {
     setButtonPopup(true);
-    setBirTanePokemon(data);
+    setOnePacman(data);
   };
 
   const getPokemon = () => {
-    fetch('https://pokeapi.co/api/v2/pokemon?limit=150%22')
+    fetch('https://pokeapi.co/api/v2/pokemon?limit=99%22')
       .then((response) => response.json())
       .then((data) => {
         setPokemon(data.results);
@@ -24,12 +25,12 @@ export const GlobalProvider = (props) => {
   };
 
   const getPokemonData = () => {
-    fetch(`https://pokeapi.co/api/v2/pokemon/${birTanePokemon.name}`)
+    fetch(`https://pokeapi.co/api/v2/pokemon/${onePacman.name}`)
       .then((response) => response.json())
       .then((data) => {
         setPokemonData(data);
       })
-      .finally(() => setLoading(false));
+      .finally(() => setLoadingPopup(false));
   };
 
   return (
@@ -43,13 +44,14 @@ export const GlobalProvider = (props) => {
         setLoading,
         buttonPopup,
         setButtonPopup,
-        birTanePokemon,
-        setBirTanePokemon,
+        onePacman,
+        setOnePacman,
         pokemonData,
         setPokemonData,
-        dahaFazla,
+        morePokemon,
         getPokemon,
         getPokemonData,
+        loadingPopup,
       }}
     >
       {props.children}

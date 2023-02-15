@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import { GlobalProvider } from './Context/GlobalState';
-import { Home } from './components/Home';
+import { Home } from './Page/Home';
 
 function App() {
   return (

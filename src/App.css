@@ -1,7 +1,8 @@
 * {
-  animation-duration: 3s;
+  animation-duration: 2s;
   transition: 0.5s all;
 }
+
 .app {
   display: flex;
   flex-direction: column;
@@ -42,6 +43,7 @@ h1 {
   flex-direction: column;
   align-items: center;
   border: 3px solid #f2f2;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.4);
 }
 
 .pokemonCard:hover {
