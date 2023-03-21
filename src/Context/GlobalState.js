@@ -6,7 +6,7 @@ export const GlobalProvider = (props) => {
   const [search, setSearch] = useState('');
   const [loading, setLoading] = useState(true);
   const [buttonPopup, setButtonPopup] = useState(false);
-  const [onePacman, setOnePacman] = useState({}); //setBirTanePokemon
+  const [onePacman, setOnePacman] = useState({});
   const [pokemonData, setPokemonData] = useState({});
   const [loadingPopup, setLoadingPopup] = useState(true);
 
