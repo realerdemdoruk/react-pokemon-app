@@ -1,16 +1,10 @@
 import React, { useContext } from 'react';
 import { GlobalContext } from '../Context/GlobalState';
 import './Popup.css';
-import { useEffect } from 'react';
 import ProcessBar from '../components/ProcessBar/ProcessBar';
 import { capitilizer } from '../capitilizer';
 const Popup = ({ setTrigger }) => {
-  const { loadingPopup, pokemonData, onePacman, getPokemonData } =
-    useContext(GlobalContext);
-
-  useEffect(() => {
-    getPokemonData();
-  }, []);
+  const { loadingPopup, pokemonData, onePacman } = useContext(GlobalContext);
 
   return (
     <div className="popup">

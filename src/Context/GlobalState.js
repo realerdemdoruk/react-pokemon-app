@@ -1,6 +1,6 @@
-import { createContext, useState, useMemo } from 'react';
-
+import { createContext, useState, useEffect, useMemo } from 'react';
 export const GlobalContext = createContext();
+
 export const GlobalProvider = (props) => {
   const [pokemon, setPokemon] = useState([]);
   const [search, setSearch] = useState('');
@@ -24,36 +24,57 @@ export const GlobalProvider = (props) => {
       .finally(() => setLoading(false));
   };
 
-  const getPokemonData = () => {
-    fetch(`https://pokeapi.co/api/v2/pokemon/${onePacman.name}`)
-      .then((response) => response.json())
-      .then((data) => {
-        setPokemonData(data);
-      })
-      .finally(() => setLoadingPopup(false));
-  };
+  useEffect(() => {
+    if (onePacman.name) {
+      setLoadingPopup(true);
+      fetch(`https://pokeapi.co/api/v2/pokemon/${onePacman.name}`)
+        .then((response) => response.json())
+        .then((data) => {
+          setPokemonData(data);
+        })
+        .finally(() => setLoadingPopup(false));
+    }
+  }, [onePacman]);
+
+  const memoizedValues = useMemo(
+    () => ({
+      pokemon,
+      setPokemon,
+      search,
+      setSearch,
+      loading,
+      setLoading,
+      buttonPopup,
+      setButtonPopup,
+      onePacman,
+      setOnePacman,
+      pokemonData,
+      setPokemonData,
+      morePokemon,
+      getPokemon,
+      loadingPopup,
+    }),
+    [
+      pokemon,
+      setPokemon,
+      search,
+      setSearch,
+      loading,
+      setLoading,
+      buttonPopup,
+      setButtonPopup,
+      onePacman,
+      setOnePacman,
+      pokemonData,
+      setPokemonData,
+      morePokemon,
+      getPokemon,
+      loadingPopup,
+    ]
+  );
 
   return (
-    <GlobalContext.Provider
-      value={{
-        pokemon,
-        setPokemon,
-        search,
-        setSearch,
-        loading,
-        setLoading,
-        buttonPopup,
-        setButtonPopup,
-        onePacman,
-        setOnePacman,
-        pokemonData,
-        setPokemonData,
-        morePokemon,
-        getPokemon,
-        getPokemonData,
-        loadingPopup,
-      }}
-    >
+    <GlobalContext.Provider value={memoizedValues}>
       {props.children}
     </GlobalContext.Provider>
   );
