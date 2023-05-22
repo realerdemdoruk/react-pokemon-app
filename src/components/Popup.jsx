@@ -51,7 +51,11 @@ const Popup = ({ setTrigger }) => {
                   {pokemonData.abilities?.map((ability, index) => {
                     return (
                       <div key={index}>
-                        <h5> {ability.ability.name}</h5>
+         
+                        <h5>
+                        {capitilizer(ability.ability.name)}
+                        
+                        </h5>
                       </div>
                     );
                   })}

@@ -15,6 +15,10 @@ export const GlobalProvider = (props) => {
     setOnePacman(data);
   };
 
+  const handleMoreInformation = (pokemon) => {
+    morePokemon(pokemon);
+  };
+
   const getPokemon = () => {
     fetch('https://pokeapi.co/api/v2/pokemon?limit=99%22')
       .then((response) => response.json())
@@ -53,6 +57,7 @@ export const GlobalProvider = (props) => {
       morePokemon,
       getPokemon,
       loadingPopup,
+      handleMoreInformation,
     }),
     [
       pokemon,
@@ -70,6 +75,7 @@ export const GlobalProvider = (props) => {
       morePokemon,
       getPokemon,
       loadingPopup,
+      handleMoreInformation
     ]
   );
 

@@ -11,7 +11,10 @@ const PokemonList = () => {
     onePacman,
     buttonPopup,
     morePokemon,
+    handleMoreInformation
   } = useContext(GlobalContext);
+
+ 
 
   return (
     <div className="pokemonContainer">
@@ -36,11 +39,14 @@ const PokemonList = () => {
                 }.png`}
                 alt={pokemon.name}
               />
-              <button onClick={() => morePokemon(pokemon)}>
+              <button onClick={() => handleMoreInformation(pokemon)}>
                 More information
               </button>
-              {buttonPopup && (
-                <Popup onePacman={onePacman} setTrigger={setButtonPopup} />
+              {buttonPopup && onePacman === pokemon && (
+                <Popup
+                  onePacman={onePacman}
+                  setTrigger={setButtonPopup}
+                />
               )}
             </div>
           );
