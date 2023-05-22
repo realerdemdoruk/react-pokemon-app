@@ -15,6 +15,11 @@ export const GlobalProvider = (props) => {
     setOnePacman(data);
   };
 
+const getPokemonNumber = (url) => {
+  const urlParts = url.split('/'); 
+  return urlParts[urlParts.length - 2]; 
+};
+
   const handleMoreInformation = (pokemon) => {
     morePokemon(pokemon);
   };
@@ -58,6 +63,7 @@ export const GlobalProvider = (props) => {
       getPokemon,
       loadingPopup,
       handleMoreInformation,
+      getPokemonNumber
     }),
     [
       pokemon,
@@ -75,7 +81,8 @@ export const GlobalProvider = (props) => {
       morePokemon,
       getPokemon,
       loadingPopup,
-      handleMoreInformation
+      handleMoreInformation,
+      getPokemonNumber
     ]
   );
 

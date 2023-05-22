@@ -11,42 +11,39 @@ const PokemonList = () => {
     onePacman,
     buttonPopup,
     morePokemon,
-    handleMoreInformation
+    getPokemonNumber
   } = useContext(GlobalContext);
-
- 
 
   return (
     <div className="pokemonContainer">
       {pokemon
         .filter((pokemon) => {
           if (search === '') {
-            return pokemon;
+            return true;
           } else if (
             pokemon.name.toLowerCase().includes(search.toLowerCase())
           ) {
-            return pokemon;
+            return true;
+          } else {
+            return false;
           }
         })
-        .map((pokemon, index) => {
+        .map((pokemon) => {
+          const pokemonNumber = getPokemonNumber(pokemon.url); // Pokemon numarasını al
+
           return (
-            <div key={index} className="pokemonCard">
+            <div key={pokemonNumber} className="pokemonCard">
               <h3>{capitilizer(pokemon.name)}</h3>
 
               <img
-                src={`http://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${
-                  index + 1
-                }.png`}
+                src={`http://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemonNumber}.png`}
                 alt={pokemon.name}
               />
-              <button onClick={() => handleMoreInformation(pokemon)}>
+              <button onClick={() => morePokemon(pokemon)}>
                 More information
               </button>
-              {buttonPopup && onePacman === pokemon && (
-                <Popup
-                  onePacman={onePacman}
-                  setTrigger={setButtonPopup}
-                />
+              {buttonPopup && (
+                <Popup onePacman={onePacman} setTrigger={setButtonPopup} />
               )}
             </div>
           );
@@ -54,5 +51,7 @@ const PokemonList = () => {
     </div>
   );
 };
+
+
 
 export default PokemonList;
